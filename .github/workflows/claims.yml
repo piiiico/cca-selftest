@@ -1,0 +1,10 @@
+on: [push, workflow_dispatch]
+jobs:
+  claims:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: cc
+        uses: piiiico/check-claim-action@v1
+        continue-on-error: true
+      - run: echo "wrong=${{ steps.cc.outputs.wrong }} unsupported=${{ steps.cc.outputs.unsupported }} holds=${{ steps.cc.outputs.holds }} unmeasurable=${{ steps.cc.outputs.unmeasurable }} outcome=${{ steps.cc.outcome }}"
